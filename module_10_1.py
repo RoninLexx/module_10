@@ -21,8 +21,13 @@ if __name__ == '__main__':
     w_t = end_time - start_time
     print(f'Работа потоков {round(w_t, 4)}')
     start_time = time.time()
-    thread = [threading.Thread(target=write_words(10, 'example5.txt')), threading.Thread(target=write_words(30, 'example6.txt')),
-              threading.Thread(target=write_words(200, 'example7.txt')), threading.Thread(target=write_words(100, 'example8.txt'))]
+    threads = []
+    for count, name in [(10, 'example5.txt'), (30, 'example6.txt'), (200, 'example7.txt'), (100, 'example8.txt')]:
+        thread = threading.Thread(target=write_words, args=(count, name))
+        threads.append(thread)
+        thread.start()
+    for thread in threads:
+        thread.join()
     end_time = time.time()
     w_t = end_time - start_time
     print(f'Работа потоков {round(w_t, 4)}')
