@@ -7,19 +7,20 @@ class Knight(threading.Thread):
         threading.Thread.__init__(self)
         self.name = name
         self.power = power
-        self.day_count = 0
-        self.enemy_count = 100
+
 
     def run(self):
         print(f'{self.name}, на нас напали!')
-        while self.enemy_count >= 0:
-            self.enemy_count -= self.power
-            self.day_count += 1
+        day_count = 0
+        enemy_count = 100
+        while enemy_count >= 0:
+            enemy_count -= self.power
+            day_count += 1
             time.sleep(1)
-            if self.enemy_count >= 0:
-                print(f'{self.name} сражается {self.day_count} дней(дня)..., осталось {self.enemy_count} войнов')
-            if self.enemy_count == 0:
-                print(f'{self.name} одержал победу спустя {self.day_count} дней(дня)!')
+            if enemy_count >= 0:
+                print(f'{self.name} сражается {day_count} дней(дня)..., осталось {enemy_count} войнов')
+            if enemy_count == 0:
+                print(f'{self.name} одержал победу спустя {day_count} дней(дня)!')
 
 
 if __name__ == '__main__':
